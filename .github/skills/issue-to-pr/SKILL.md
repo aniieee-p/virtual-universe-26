@@ -24,9 +24,9 @@ same `gh` commands you ran by hand in Section 1.
 5. Make the smallest change that fixes the issue, and run the project's tests
    if it has any.
 6. Commit, push, and open a draft pull request that closes the issue:
-- `gh pr create --draft --title "Fix #<n>: <issue title>" --body "<body>"`
-- Start the body with "Closes #<n>", then add a short summary and a
-  "How to test" section with the exact commands a reviewer can run.
+   - `gh pr create --draft --title "Fix #<n>: <issue title>" --body "<body>"`
+   - Start the body with "Closes #<n>", then add a short summary and a
+     "How to test" section with the exact commands a reviewer can run.
 7. Ask before commenting on the issue with what changed and how to test it.
    Report the exact issue, PR, and branch. Leave this PR branch checked out so
    the learner can review it in the same session; do not switch branches.
