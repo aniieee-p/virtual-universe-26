@@ -1,12 +1,11 @@
 ---
 name: issue-to-pr
-description: Read an open issue, propose a fix, and open a draft pull request for review. Use when asked to turn an issue into a suggested fix or pull request.
+description: Safely fix a GitHub issue in the learner's fork and open a draft pull request.
 ---
 
-# Issue to PR
+# Issue to Pull Request
 
-Turn one open issue into a suggested fix that a person reviews. These are the
-same `gh` commands you ran by hand in Section 1.
+Follow this workflow to fix one GitHub issue.
 
 1. Confirm the learner's fork target and push remote established in this
    session. Inspect `git remote -v`, verify the selected destination with
@@ -17,23 +16,36 @@ same `gh` commands you ran by hand in Section 1.
    - If no fork destination is ready, stop before edits or resource creation.
      Offer to prepare it in this same checkout with approval, preserving origin,
      other remotes, and local work. Do not open or switch sessions.
-2. Pick the issue. Use the number you were given, or list open issues and ask:
-   `gh issue list --state open`
-3. Read the issue and the code it mentions: `gh issue view <n>`
-4. Create a branch: `git switch -c fix/issue-<n>`
-5. Make the smallest change that fixes the issue, and run the project's tests
-   if it has any.
-6. Show the changes and obtain approval before committing, pushing explicitly to
-   the verified fork remote, and opening
-   a draft pull request that closes the issue. Preserve any learner skill edits
-   and include them only with approval:
-   `gh pr create --draft --title "Fix #<n>: <issue title>" --body "Closes #<n>"`
+2. Select an issue:
+   - Use the issue number provided by the learner, or list open issues with
+     `gh issue list --state open` and ask which one to fix.
+   - Read it using `gh issue view <n>` and inspect the relevant code.
+   - If the fix is unclear, ask the learner for clarification rather than
+     guessing.
+3. Create a branch using the actual issue number:
+   - Example: `git switch -c fix/issue-123`
+   - Replace `123` with the real issue number. Never type angle-bracket
+     placeholders literally.
+4. When a fix needs library or API documentation, use the Context7 Expert agent
+   and connected Context7 MCP tools.
+   - Resolve the library ID and retrieve relevant documentation.
+   - Send only public documentation queries, not repository contents.
+   - Cite relevant documentation sources in the draft PR.
+   - If the agent or connector is unavailable, report that instead of claiming
+     the lookup succeeded.
+5. Make the smallest change that fixes the issue. Run the project's tests if
+   available. Stage only files changed for this issue.
+6. Show the changes and obtain the learner's authorization before committing,
+   pushing explicitly to the verified fork remote, and opening a draft pull
+   request that closes the issue. Preserve any learner skill edits and include
+   them only with approval.
+   - Use a title such as `Fix #123: Issue title`, replacing placeholders with
+     the actual issue number and title.
+   - Start the PR body with `Closes #123`, followed by a short summary and a
+     `How to test` section containing exact commands a reviewer can run.
 7. Ask before commenting on the issue with what changed and how to test it.
-   Report the exact issue, PR, and branch. Leave this PR branch checked out so
+8. Report the exact issue, PR, and branch. Leave the PR branch checked out so
    the learner can review it in the same session; do not switch branches.
 
-## Rules
-
-- Never merge, approve, or close anything. A person reviews the pull request.
-- If the fix is unclear, comment on the issue with your questions instead of guessing.
-- Stage only the files you changed for this issue.
+Never merge, approve, or close a PR or issue. Do not perform any commit, push,
+or PR action without the learner's authorization.
